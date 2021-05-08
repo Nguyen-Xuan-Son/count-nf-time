@@ -30,16 +30,32 @@ const styles = StyleSheet.create({
   },
   timeCountWrapperDayItem: {
     marginBottom: 10,
-    marginTop: 10,
   },
   timeCountWrapperItem: {
     alignItems: 'center',
     paddingLeft: 10,
     paddingRight: 10,
   },
+  title: {
+    marginBottom: 10,
+  },
+  buttonTitle: {
+    marginBottom: 40,
+  },
+  button: {
+    borderRadius: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    backgroundColor: '#ffffff3b',
+  },
+  buttonContent: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#fff',
+  },
 });
 
-export default function Home(props) {
+export default function Home({navigation}) {
   const [dayCount, setDayCount] = useState('-');
   const [hourCount, setHourCount] = useState('--');
   const [minuteCount, setMinuteCount] = useState('--');
@@ -70,7 +86,7 @@ export default function Home(props) {
   };
 
   const redirectToProcess = () => {
-    props.navigation.navigate('Progress');
+    navigation.navigate('Progress');
   };
 
   useEffect(() => {
@@ -102,78 +118,75 @@ export default function Home(props) {
       style={styles.bg}
       source={require('./../assets/images/bg.jpeg')}>
       <View style={styles.root}>
-        <View>
-          <ButtonBase content="New kid" onPress={redirectToProcess} />
+        <View style={styles.buttonTitle}>
+          <ButtonBase style={styles.button} onPress={redirectToProcess}>
+            <View>
+              <TextBase style={styles.buttonContent}>New kid</TextBase>
+            </View>
+          </ButtonBase>
         </View>
         <View style={styles.countDownContainer}>
-          <View>
-            <TextBase
-              content="It has been"
-              color="#fff"
-              fontSize={22}
-              opacity={0.8}
-            />
+          <View style={styles.title}>
+            <TextBase color="#fff" fontSize={22} opacity={0.8}>
+              It has been
+            </TextBase>
           </View>
-          <View
-            style={[styles.timeCountWrapper, styles.timeCountWrapperDayItem]}>
-            <View>
-              <TextBase
-                content={dayCount + ' '}
-                color="#fff"
-                fontWeight="bold"
-                fontSize={45}
-              />
+
+          {Number(dayCount) !== 0 && (
+            <View
+              style={[styles.timeCountWrapper, styles.timeCountWrapperDayItem]}>
+              <View>
+                <TextBase color="#fff" fontWeight="bold" fontSize={50}>
+                  {dayCount + ' '}
+                </TextBase>
+              </View>
+              <View>
+                <TextBase color="#fff">
+                  {Number(dayCount) > 1 ? 'days' : 'day'}
+                </TextBase>
+              </View>
             </View>
-            <View>
-              <TextBase
-                content={Number(dayCount) ? 'days' : 'day'}
-                color="#fff"
-              />
-            </View>
-          </View>
+          )}
+
           <View style={styles.timeCountWrapper}>
+            {Number(hourCount) !== 0 && (
+              <View style={styles.timeCountWrapperItem}>
+                <View>
+                  <TextBase color="#fff" fontWeight="bold">
+                    {hourCount}
+                  </TextBase>
+                </View>
+                <View>
+                  <TextBase color="#fff" fontSize={12}>
+                    {Number(hourCount) > 1 ? 'hours' : 'hour'}
+                  </TextBase>
+                </View>
+              </View>
+            )}
+            {Number(minuteCount) !== 0 && (
+              <View style={styles.timeCountWrapperItem}>
+                <View>
+                  <TextBase color="#fff" fontWeight="bold">
+                    {minuteCount}
+                  </TextBase>
+                </View>
+                <View>
+                  <TextBase color="#fff" fontSize={12}>
+                    {Number(minuteCount) > 1 ? 'minutes' : 'minute'}
+                  </TextBase>
+                </View>
+              </View>
+            )}
             <View style={styles.timeCountWrapperItem}>
               <View>
-                <TextBase content={hourCount} color="#fff" fontWeight="bold" />
+                <TextBase fontWeight="bold" color="#fff">
+                  {secondCount}
+                </TextBase>
               </View>
               <View>
-                <TextBase
-                  content={Number(hourCount) ? 'hours' : 'hour'}
-                  color="#fff"
-                  fontSize={12}
-                />
-              </View>
-            </View>
-            <View style={styles.timeCountWrapperItem}>
-              <View>
-                <TextBase
-                  content={minuteCount}
-                  color="#fff"
-                  fontWeight="bold"
-                />
-              </View>
-              <View>
-                <TextBase
-                  content={Number(minuteCount) ? 'minutes' : 'minute'}
-                  color="#fff"
-                  fontSize={12}
-                />
-              </View>
-            </View>
-            <View style={styles.timeCountWrapperItem}>
-              <View>
-                <TextBase
-                  content={secondCount}
-                  fontWeight="bold"
-                  color="#fff"
-                />
-              </View>
-              <View>
-                <TextBase
-                  content={Number(secondCount) ? 'seconds' : 'second'}
-                  color="#fff"
-                  fontSize={12}
-                />
+                <TextBase color="#fff" fontSize={12}>
+                  {Number(secondCount) > 1 ? 'seconds' : 'second'}
+                </TextBase>
               </View>
             </View>
           </View>

@@ -1,18 +1,18 @@
 import React from 'react';
-import {Text, TouchableOpacity} from 'react-native';
+import {TouchableOpacity} from 'react-native';
 
 export default function ButtonBase(props) {
-  const {content, onPress} = props;
+  const {onPress, style, children} = props;
 
-  const style = {
+  const defaultStyle = {
     alignItems: 'center',
     backgroundColor: '#DDDDDD',
     padding: 10,
   };
 
   return (
-    <TouchableOpacity style={style} onPress={onPress}>
-      <Text>{content}</Text>
+    <TouchableOpacity style={{...defaultStyle, ...style}} onPress={onPress}>
+      {children}
     </TouchableOpacity>
   );
 }

@@ -2,9 +2,9 @@ import React from 'react';
 import {Text} from 'react-native';
 
 export default function TextBase(props) {
-  const {content, fontSize, color, opacity, fontWeight} = props;
-  const style = {
-    color: color || '#000',
+  const {children, fontSize, color, opacity, fontWeight, style} = props;
+  const defaultStyle = {
+    color: color || '#fff',
     fontSize: fontSize || 30,
     opacity: opacity || 1,
     fontWeight: fontWeight || 'normal',
@@ -13,9 +13,10 @@ export default function TextBase(props) {
   return (
     <Text
       style={{
+        ...defaultStyle,
         ...style,
       }}>
-      {content}
+      {children}
     </Text>
   );
 }

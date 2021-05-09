@@ -89,3 +89,5 @@ export default function MilestoneComponent() {
     </View>
   );
 }
+
+// https://api.quotable.io/random

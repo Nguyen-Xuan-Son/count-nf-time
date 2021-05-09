@@ -27,13 +27,13 @@ const styles = StyleSheet.create({
   backButton: {
     backgroundColor: '#ffffff3b',
     borderRadius: 30,
-    width: 100,
+    width: 80,
     marginLeft: 8,
   },
   backButtonContent: {
     color: '#fff',
-    marginLeft: 8,
-    fontSize: 22,
+    marginLeft: 6,
+    fontSize: 18,
     fontWeight: 'bold',
   },
   backButtonContainer: {

@@ -1,17 +1,18 @@
 import React from 'react';
-import {View, StyleSheet, ScrollView, Image} from 'react-native';
+import {View, StyleSheet, ScrollView, ImageBackground} from 'react-native';
 import {TextBase} from '../../components';
+import {MILESTONES} from '../../constants';
 
 const styles = StyleSheet.create({
   root: {
     height: 300,
     backgroundColor: '#ffffff3b',
-    padding: 10,
   },
   headerContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    padding: 10,
   },
   title: {
     fontSize: 24,
@@ -21,7 +22,33 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  contentContainer: {},
+  contentContainer: {
+    flexDirection: 'row',
+    flexGrow: 1,
+  },
+  contentItem: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  contentItemBg: {
+    width: 200,
+    marginLeft: 10,
+    marginBottom: 10,
+    resizeMode: 'cover',
+    opacity: 0.3,
+    borderRadius: 20,
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowRadius: 5,
+    shadowOpacity: 1.0,
+  },
+  contentItemBgActive: {
+    opacity: 1,
+  },
 });
 
 export default function MilestoneComponent() {
@@ -37,55 +64,26 @@ export default function MilestoneComponent() {
       </View>
       <View style={styles.contentContainer}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <View style={{width: 200, height: 200}}>
-            <Image
-              style={{flex: 1, resizeMode: 'cover', height: null, width: null}}
-              source={require('./../../assets/images/cool-kid-level.jpeg')}
-            />
-            <TextBase>1/8</TextBase>
-          </View>
-          <View style={{width: 200, height: 200}}>
-            <Image
-              style={{flex: 1, resizeMode: 'cover', height: null, width: null}}
-              source={require('./../../assets/images/cool-kid-level.jpeg')}
-            />
-            <TextBase>1/8</TextBase>
-          </View>
-          <View style={{width: 200, height: 200}}>
-            <Image
-              style={{flex: 1, resizeMode: 'cover', height: null, width: null}}
-              source={require('./../../assets/images/cool-kid-level.jpeg')}
-            />
-            <TextBase>1/8</TextBase>
-          </View>
-          <View style={{width: 200, height: 200}}>
-            <Image
-              style={{flex: 1, resizeMode: 'cover', height: null, width: null}}
-              source={require('./../../assets/images/cool-kid-level.jpeg')}
-            />
-            <TextBase>1/8</TextBase>
-          </View>
-          <View style={{width: 200, height: 200}}>
-            <Image
-              style={{flex: 1, resizeMode: 'cover', height: null, width: null}}
-              source={require('./../../assets/images/cool-kid-level.jpeg')}
-            />
-            <TextBase>1/8</TextBase>
-          </View>
-          <View style={{width: 200, height: 200}}>
-            <Image
-              style={{flex: 1, resizeMode: 'cover', height: null, width: null}}
-              source={require('./../../assets/images/cool-kid-level.jpeg')}
-            />
-            <TextBase>1/8</TextBase>
-          </View>
-          <View style={{width: 200, height: 200}}>
-            <Image
-              style={{flex: 1, resizeMode: 'cover', height: null, width: null}}
-              source={require('./../../assets/images/cool-kid-level.jpeg')}
-            />
-            <TextBase>1/8</TextBase>
-          </View>
+          {MILESTONES.map((milestone, index) => {
+            return (
+              <ImageBackground
+                key={index}
+                style={[
+                  styles.contentItemBg,
+                  index === 1 ? styles.contentItemBgActive : '',
+                ]}
+                source={milestone.imageUrl}>
+                <View style={styles.contentItem}>
+                  <TextBase>{milestone.value}</TextBase>
+                  <TextBase>
+                    {milestone.days
+                      ? milestone.days + ' Days'
+                      : milestone.days + ' Day'}
+                  </TextBase>
+                </View>
+              </ImageBackground>
+            );
+          })}
         </ScrollView>
       </View>
     </View>
